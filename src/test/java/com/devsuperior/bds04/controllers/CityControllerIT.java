@@ -105,7 +105,7 @@ public class CityControllerIT {
 
 		String accessToken = tokenUtil.obtainAccessToken(mockMvc, adminUsername, adminPassword);
 
-		CityDTO dto = new CityDTO(null, "    ");
+		CityDTO dto = new CityDTO(null,"      ");
 		String jsonBody = objectMapper.writeValueAsString(dto);
 		
 		ResultActions result =

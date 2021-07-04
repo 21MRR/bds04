@@ -151,7 +151,7 @@ public class EventControllerIT {
 		
 		result.andExpect(status().isUnprocessableEntity());
 		result.andExpect(jsonPath("$.errors[0].fieldName").value("date"));
-		result.andExpect(jsonPath("$.errors[0].message").value("A data do evento não pode ser passada"));
+		result.andExpect(jsonPath("$.errors[0].message").value("Data tem que ser futura"));
 	}
 
 	@Test

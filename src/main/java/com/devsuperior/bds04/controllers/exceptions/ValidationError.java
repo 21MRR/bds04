@@ -8,7 +8,7 @@ public class ValidationError extends StandardError {
 
 	private List<FieldMessage> errors = new ArrayList<>();
 	
-	public List<FieldMessage> getErros(){
+	public List<FieldMessage> getErrors(){
 		return errors;
 	}
 	

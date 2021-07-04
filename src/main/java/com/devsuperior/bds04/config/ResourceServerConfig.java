@@ -24,10 +24,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 
-	private static final String[] OPERATOR_OR_ADMIN = { "/products/**", "/categories/**" };
+	private static final String[] OPERATOR_CLIENT = { "/events/**","/cities/**" };
+	
+	private static final String[] OPERATOR_EVENT = { "/events/**"};
 
-	private static final String[] ADMIN = { "/users/**" };
-
+	
+	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
 		resources.tokenStore(tokenStore);
@@ -44,9 +46,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		}
 
 		http.authorizeRequests().antMatchers(PUBLIC).permitAll()
-		        .antMatchers(HttpMethod.GET, OPERATOR_OR_ADMIN)
-				.permitAll().antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN").antMatchers(ADMIN)
-				.hasRole("ADMIN").anyRequest().authenticated();
+		        .antMatchers(HttpMethod.GET, OPERATOR_CLIENT).permitAll()
+				.antMatchers(HttpMethod.POST,OPERATOR_CLIENT).hasRole("ADMIN")
+				.antMatchers(HttpMethod.POST,OPERATOR_EVENT).hasRole("CLIENT")
+				.anyRequest().hasAnyRole("ADMIN");
 
 	}
 
